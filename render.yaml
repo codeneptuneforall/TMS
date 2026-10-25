@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: tms-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run server
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: NODE_VERSION
+        value: 20
