@@ -32,25 +32,26 @@ export const navigation: NavSection[] = [
 {
   title: null,
   items: [
-  { to: '/overview', label: 'Overview', icon: LayoutGridIcon, roles: ['admin', 'agent', 'requester'] },
-  { to: '/queue/mine', label: 'My Tickets', icon: InboxIcon, roles: ['admin', 'agent', 'requester'], count: 'mine' },
-  { to: '/queue/all', label: 'All Tickets', icon: TicketIcon, roles: ['admin', 'agent'] },
-  { to: '/queue/unassigned', label: 'Unassigned', icon: CircleDashedIcon, roles: ['admin', 'agent'], count: 'unassigned' },
-  { to: '/queue/team', label: 'Team Queue', icon: UsersRoundIcon, roles: ['admin', 'agent'] },
-  { to: '/queue/resolved', label: 'Resolved', icon: CircleCheckBigIcon, roles: ['admin', 'agent', 'requester'] }]
+  { to: '/overview', label: 'Overview', icon: LayoutGridIcon, roles: ['admin', 'manager', 'agent', 'requester'] },
+  { to: '/queue/mine', label: 'My Tickets', icon: InboxIcon, roles: ['admin', 'manager', 'agent', 'requester'], count: 'mine' },
+  { to: '/queue/all', label: 'All Tickets', icon: TicketIcon, roles: ['admin', 'manager', 'agent'] },
+  { to: '/queue/unassigned', label: 'Unassigned', icon: CircleDashedIcon, roles: ['admin', 'manager', 'agent'], count: 'unassigned' },
+  { to: '/queue/team', label: 'Team Queue', icon: UsersRoundIcon, roles: ['admin', 'manager', 'agent'] },
+  { to: '/escalations', label: 'Escalations', icon: TicketIcon, roles: ['admin', 'manager'] },
+  { to: '/queue/resolved', label: 'Resolved', icon: CircleCheckBigIcon, roles: ['admin', 'manager', 'agent', 'requester'] }]
 
 },
 {
   title: 'Views',
   items: [
-  { to: '/queue/pending', label: 'Pending', icon: ClockIcon, roles: ['admin', 'agent'] },
-  { to: '/queue/closed', label: 'Closed', icon: ArchiveIcon, roles: ['admin', 'agent'] }]
+  { to: '/queue/pending', label: 'Pending', icon: ClockIcon, roles: ['admin', 'manager', 'agent'] },
+  { to: '/queue/closed', label: 'Closed', icon: ArchiveIcon, roles: ['admin', 'manager', 'agent'] }]
 
 },
 {
   title: 'Workspace',
   items: [
-  { to: '/reports', label: 'Reports', icon: BarChart3Icon, roles: ['admin', 'agent'] },
+  { to: '/reports', label: 'Reports', icon: BarChart3Icon, roles: ['admin', 'manager', 'agent'] },
   { to: '/admin/users', label: 'Users & Teams', icon: UsersIcon, roles: ['admin'], matchPrefix: '/admin' },
   { to: '/settings/general', label: 'Settings', icon: SettingsIcon, roles: ['admin'], matchPrefix: '/settings' }]
 

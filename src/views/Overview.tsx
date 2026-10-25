@@ -42,7 +42,7 @@ export function Overview() {
         </div> :
       user.role === 'admin' ?
       <AdminDashboard /> :
-      user.role === 'agent' ?
+      user.role === 'agent' || user.role === 'manager' ?
       <AgentDashboard /> :
 
       <RequesterDashboard />

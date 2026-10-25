@@ -16,6 +16,11 @@ export async function seedIfEmpty() {
     if ((await Model.countDocuments()) === 0) {
       await Model.collection.drop().catch(() => {});
       if (data.length) await Model.insertMany(data.map((x: any) => ({ ...x })));
+    } else {
+      // backfill missing records without resetting existing data
+      for (const item of data) {
+        await Model.updateOne({ id: item.id }, { $set: item }, { upsert: true });
+      }
     }
   }
 

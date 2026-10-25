@@ -24,5 +24,6 @@ export const users: User[] = [
 export const DEFAULT_USER_BY_ROLE = {
   admin: 'u-maya',
   agent: 'u-daniel',
-  requester: 'u-priya'
+  requester: 'u-priya',
+  manager: 'u-tl'
 } as const;

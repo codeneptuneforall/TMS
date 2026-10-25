@@ -16,7 +16,7 @@ import { PasswordRequirements, passwordValid } from '../components/auth/Password
 import { useAppState, useCurrentUser } from '../contexts/AppStateContext';
 import { NotFound } from './system/NotFound';
 
-const ROLE_LABEL = { admin: 'Administrator', agent: 'Support agent', requester: 'Customer' };
+const ROLE_LABEL = { admin: 'Administrator', manager: 'Team Leader / Support Manager', agent: 'Support agent', requester: 'Customer' };
 
 export function Account() {
   const { section = 'profile' } = useParams();

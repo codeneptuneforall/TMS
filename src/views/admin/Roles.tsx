@@ -8,7 +8,7 @@ import type { Role } from '../../types/user';
 
 type Access = boolean | string;
 
-const MATRIX: {group: string;rows: {label: string;access: Record<Role, Access>;}[];}[] = [
+const MATRIX: {group: string;rows: {label: string;access: Partial<Record<Role, Access>>;}[];}[] = [
 {
   group: 'Tickets',
   rows: [
@@ -34,15 +34,16 @@ const MATRIX: {group: string;rows: {label: string;access: Record<Role, Access>;}
 }];
 
 
-function Cell({ value }: {value: Access;}) {
+function Cell({ value }: {value: Access | undefined;}) {
   if (value === true) return <span className="inline-flex items-center gap-1 text-success-fg"><CheckIcon className="h-4 w-4" aria-hidden /><span className="sr-only">Allowed</span></span>;
+  if (value === undefined) return <span className="text-ink-3">-</span>;
   if (value === false) return <span className="inline-flex text-ink-3"><MinusIcon className="h-4 w-4" aria-hidden /><span className="sr-only">Not allowed</span></span>;
   return <span className="text-[12px] text-ink-2">{value}</span>;
 }
 
 export function Roles() {
   const { users } = useAppState();
-  const roles: Role[] = ['admin', 'agent', 'requester'];
+  const roles: Role[] = ['admin', 'manager', 'agent', 'requester'];
   return (
     <PageContainer wide>
       <PageHeader title="Users & Teams" description="Manage who can access Cadence Support and what they can do." />

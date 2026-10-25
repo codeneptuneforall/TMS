@@ -15,6 +15,7 @@ import type { Role, User } from '../../types/user';
 
 const ROLE_HELP: Record<Role, string> = {
   admin: 'Full access, including users, teams, reports, and settings.',
+  manager: 'Supervises support agents, manages team tickets, and handles escalated issues.',
   agent: 'Works tickets for their teams. Can reply, add notes, and update workflow.',
   requester: 'Creates tickets and sees only their own requests.'
 };

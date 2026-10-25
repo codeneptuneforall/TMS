@@ -12,6 +12,7 @@ import { useAppState } from '../../contexts/AppStateContext';
 
 const DEMO_ACCOUNTS = [
 { email: 'maya@relaydesk.io', role: 'Administrator' },
+{ email: 'tl@relaydesk.io', role: 'Team Leader / Support Manager' },
 { email: 'daniel@relaydesk.io', role: 'Support agent' },
 { email: 'priya.shah@lumenhealth.com', role: 'Customer' }];
 
@@ -73,6 +74,16 @@ export function SignIn() {
           Sign in
         </Button>
       </form>
+      <div className="mt-6 space-y-2">
+        <p className="text-[12px] text-ink-3">Demo accounts (click to fill):</p>
+        <div className="flex flex-wrap gap-2">
+          {DEMO_ACCOUNTS.map((a) => (
+            <button key={a.email} type="button" onClick={() => { setEmail(a.email); setPassword('password123'); }} className="rounded-md border border-line bg-surface px-3 py-1.5 text-[12px] text-ink-2 hover:bg-subtle">
+              {a.role} · {a.email}
+            </button>
+          ))}
+        </div>
+      </div>
     </AuthLayout>);
 
 }

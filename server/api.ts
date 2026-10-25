@@ -246,6 +246,35 @@ router.post('/tickets/:id/messages', async (req, res) => {
   res.status(201).json({ ok: true, data: message, ticket: clean(t) });
 });
 
+// Escalate ticket to team leader
+router.post('/tickets/:id/escalate', async (req, res) => {
+  const { reason, description, actorId } = req.body || {};
+  const t = await Ticket.findOne({ id: req.params.id });
+  if (!t) return res.status(404).json({ error: 'Not found' });
+  const team = await Team.findOne({ id: t.teamId }).lean();
+  const leaderId = (team?.memberIds || []).find(async (m: string) => {
+    const u = await User.findOne({ id: m }).lean();
+    return u && (u.role === 'manager' || u.role === 'admin');
+  });
+  // fallback: find any manager in team
+  let tlId = null;
+  if (team?.memberIds) {
+    for (const m of team.memberIds) {
+      const u = await User.findOne({ id: m }).lean();
+      if (u && (u.role === 'manager' || u.role === 'admin')) { tlId = m; break; }
+    }
+  }
+  if (!tlId) return res.status(400).json({ error: 'No team leader assigned' });
+  const now = new Date().toISOString();
+  const esc = { id: `e-${Date.now()}`, reason, description, escalatedBy: actorId, teamLeaderId: tlId, state: 'open', createdAt: now, updatedAt: now };
+  t.escalation = esc as any;
+  t.activity.push({ id: `a-${Date.now()}`, kind: 'escalated', actorId, createdAt: now, from: null, to: tlId } as any);
+  t.updatedAt = now;
+  await t.save();
+  await Notification.create({ id: `n-${Date.now()}`, recipientId: tlId, title: 'Ticket escalated', body: `${t.id}: ${reason}`, read: false, createdAt: now });
+  res.json(clean(t));
+});
+
 // Notifications
 router.get('/notifications', async (req, res) => {
   const recipientId = req.query.recipientId as string;

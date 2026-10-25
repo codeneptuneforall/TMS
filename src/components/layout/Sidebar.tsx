@@ -20,7 +20,7 @@ interface SidebarProps {
   onRequestSignOut: () => void;
 }
 
-const ROLE_LABEL = { admin: 'Administrator', agent: 'Support agent', requester: 'Customer' };
+const ROLE_LABEL = { admin: 'Administrator', manager: 'Team Leader / Support Manager', agent: 'Support agent', requester: 'Customer' };
 
 export function Sidebar({ collapsed, onToggleCollapse, onRequestSignOut }: SidebarProps) {
   const user = useCurrentUser();

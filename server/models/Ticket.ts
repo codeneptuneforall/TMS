@@ -25,6 +25,19 @@ const ActivitySchema = new mongoose.Schema({
   to: mongoose.Schema.Types.Mixed,
 }, { _id: false });
 
+const EscalationSchema = new mongoose.Schema({
+  id: String,
+  reason: String,
+  description: String,
+  escalatedBy: String,
+  teamLeaderId: String,
+  state: String,
+  createdAt: String,
+  updatedAt: String,
+  resolvedAt: String,
+  returnInstructions: String,
+}, { _id: false });
+
 const TicketSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   subject: String,
@@ -43,6 +56,7 @@ const TicketSchema = new mongoose.Schema({
   attachments: [AttachmentSchema],
   messages: [MessageSchema],
   activity: [ActivitySchema],
+  escalation: EscalationSchema,
 }, { versionKey: false });
 
 export const Ticket = mongoose.model('Ticket', TicketSchema, 'tickets');

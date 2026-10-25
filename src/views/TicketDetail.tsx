@@ -9,7 +9,7 @@ import { ReplyComposer } from '../components/tickets/ReplyComposer';
 import { TicketMetaPanel } from '../components/tickets/TicketMetaPanel';
 import { Tabs } from '../components/ui/Tabs';
 import { Drawer } from '../components/ui/Drawer';
-import { ButtonLink } from '../components/ui/Button';
+import { Button, ButtonLink } from '../components/ui/Button';
 import { EmptyState, Skeleton } from '../components/ui/States';
 import { useAppState, useCurrentUser } from '../contexts/AppStateContext';
 import { useSimulatedLoading } from '../hooks/useSimulatedLoading';
@@ -26,7 +26,25 @@ export function TicketDetail() {
   const { getTicket } = useAppState();
   const [loading] = useSimulatedLoading(id, 300);
   const [tab, setTab] = useState<DetailTab>('conversation');
+  const [escalating, setEscalating] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const escalate = async () => {
+    const reason = window.prompt('Escalation reason:', 'Technical issue requiring senior assistance');
+    if (!reason) return;
+    const description = window.prompt('Description for team leader:', '') || '';
+    setEscalating(true);
+    try {
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+      await fetch(`${apiBase}/tickets/${id.toUpperCase()}/escalate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason, description, actorId: user.id })
+      });
+      alert('Escalated');
+    } finally {
+      setEscalating(false);
+    }
+  };
   const ticket = getTicket(id.toUpperCase());
 
   if (loading) return <DetailSkeleton />;
@@ -57,6 +75,9 @@ export function TicketDetail() {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <TicketHeader ticket={ticket} onOpenDetails={() => setDetailsOpen(true)} />
+      <div className="px-4 py-2">
+        <Button size="sm" loading={escalating} onClick={escalate}>Escalate to Team Leader</Button>
+      </div>
 
       <div className="flex min-h-0 flex-1">
         <section className="flex min-w-0 flex-1 flex-col bg-canvas" aria-label="Conversation">

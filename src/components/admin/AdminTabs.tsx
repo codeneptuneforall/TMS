@@ -36,7 +36,7 @@ export function AdminTabs() {
 
 }
 
-export const ROLE_LABEL = { admin: 'Administrator', agent: 'Support agent', requester: 'Customer' } as const;
+export const ROLE_LABEL = { admin: 'Administrator', manager: 'Team Leader / Support Manager', agent: 'Support agent', requester: 'Customer' } as const;
 export const ACCOUNT_STATUS = {
   active: { label: 'Active', tone: 'success' },
   invited: { label: 'Invited', tone: 'info' },

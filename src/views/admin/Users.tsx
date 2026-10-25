@@ -106,6 +106,7 @@ export function Users() {
             <option value="">All roles</option>
             <option value="admin">Administrators</option>
             <option value="agent">Support agents</option>
+            <option value="manager">Team Leaders</option>
             <option value="requester">Customers</option>
           </Select>
           <Select aria-label="Filter by status" value={status} onChange={(e) => {setStatus(e.target.value);setPage(1);}} className="h-8 text-[13px]">
