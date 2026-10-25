@@ -48,22 +48,7 @@ export function SignIn() {
   return (
     <AuthLayout
       title="Sign in to Relay"
-      description="Use your work email to access Cadence Support."
-      footer={
-      <div className="mx-auto max-w-[400px] rounded-lg border border-dashed border-line-strong px-4 py-3 text-left">
-          <p className="text-[12px] font-medium text-ink-2">Prototype accounts · any password with 8+ characters</p>
-          <ul className="mt-1.5 space-y-1">
-            {DEMO_ACCOUNTS.map((a) =>
-          <li key={a.email}>
-                <button type="button" onClick={() => {setEmail(a.email);setPassword('prototype');}} className="flex w-full justify-between gap-3 rounded text-[12px] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50">
-                  <span className="truncate text-ink-2">{a.email}</span>
-                  <span className="shrink-0">{a.role}</span>
-                </button>
-              </li>
-          )}
-          </ul>
-        </div>
-      }>
+      description="Use your work email to access Cadence Support.">
       
       <form onSubmit={submit} noValidate className="space-y-4">
         {error && <InlineAlert>{error}</InlineAlert>}
