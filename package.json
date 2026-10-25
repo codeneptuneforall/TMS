@@ -13,7 +13,8 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
     "test": "tsx scripts/run-tests.ts",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "build:cf": "opennextjs-cloudflare build"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
