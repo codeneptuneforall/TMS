@@ -1,4 +1,4 @@
-export type Role = 'admin' | 'agent' | 'requester';
+export type Role = 'admin' | 'manager' | 'agent' | 'requester';
 export type AccountStatus = 'active' | 'invited' | 'suspended';
 
 export interface User {

@@ -10,9 +10,10 @@ import { isActive } from './ticketMeta';
 
 export const isStaff = (user: User | null | undefined): boolean => !!user && user.role !== 'requester';
 export const isAdmin = (user: User | null | undefined): boolean => user?.role === 'admin';
+export const isManager = (user: User | null | undefined): boolean => user?.role === 'manager' || user?.role === 'admin';
 
 export function canViewTicket(user: User, ticket: Ticket): boolean {
-  if (user.role === 'admin') return true;
+  if (user.role === 'admin' || user.role === 'manager') return true;
   if (user.role === 'requester') return ticket.requesterId === user.id;
   return (
     ticket.assigneeId === user.id ||
@@ -40,7 +41,7 @@ export function ticketsForView(view: QueueView, user: User, tickets: Ticket[]): 
     case 'unassigned':
       return scope.filter((t) => t.assigneeId === null && isActive(t.status));
     case 'team':
-      return user.role === 'admin' ?
+      return user.role === 'admin' || user.role === 'manager' ?
       scope.filter((t) => t.teamId !== null) :
       scope.filter((t) => t.teamId !== null && user.teamIds.includes(t.teamId));
     case 'pending':

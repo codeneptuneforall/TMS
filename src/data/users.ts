@@ -3,6 +3,7 @@ import type { User } from '../types/user';
 // Prototype data — fictional people and organizations.
 export const users: User[] = [
 { id: 'u-maya', name: 'Maya Okafor', email: 'maya@relaydesk.io', role: 'admin', teamIds: [], status: 'active', title: 'Head of Support Operations', organization: 'Cadence', createdAt: '2025-02-03T09:00:00', lastActiveAt: '2026-10-24T09:52:00' },
+{ id: 'u-tl', name: 'Team Lead', email: 'tl@relaydesk.io', role: 'manager', teamIds: ['t-tier1'], status: 'active', title: 'Team Lead', organization: 'Cadence', createdAt: '2025-04-14T09:00:00', lastActiveAt: '2026-10-24T09:58:00' },
 { id: 'u-daniel', name: 'Daniel Reyes', email: 'daniel@relaydesk.io', role: 'agent', teamIds: ['t-tier1'], status: 'active', title: 'Support Specialist', organization: 'Cadence', createdAt: '2025-04-14T09:00:00', lastActiveAt: '2026-10-24T09:58:00' },
 { id: 'u-sofia', name: 'Sofia Lindqvist', email: 'sofia@relaydesk.io', role: 'agent', teamIds: ['t-tier1'], status: 'active', title: 'Senior Support Specialist', organization: 'Cadence', createdAt: '2025-03-02T09:00:00', lastActiveAt: '2026-10-24T09:31:00' },
 { id: 'u-kenji', name: 'Kenji Watanabe', email: 'kenji@relaydesk.io', role: 'agent', teamIds: ['t-escalations'], status: 'active', title: 'Support Engineer', organization: 'Cadence', createdAt: '2025-05-20T09:00:00', lastActiveAt: '2026-10-24T09:41:00' },
